@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('title', 'Kategori Tugas')
-@section('page_title', 'Kategori Tugas')
+@section('page_title', 'Kelola Kategori Tugas')
+
+@push('styles')
+    
+    <link href="/admin/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/admin/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+@endpush
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -10,7 +16,7 @@
 
 @section('content')
 <div class="row g-4">
-    <!-- Form Tambah Kategori -->
+    
     <div class="col-lg-4">
         <div class="card mb-0">
             <div class="card-header border-bottom">
@@ -59,22 +65,22 @@
         </div>
     </div>
 
-    <!-- Tabel Daftar Kategori -->
+    
     <div class="col-lg-8">
         <div class="card mb-0">
             <div class="card-header border-bottom d-flex justify-content-between align-items-center">
                 <h4 class="header-title mb-0">Daftar Kategori</h4>
                 <span class="badge bg-primary-subtle text-primary">{{ $categories->count() }} Kategori</span>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-centered mb-0 align-middle">
+                    <table id="categories-datatable" class="table table-hover table-centered mb-0 align-middle w-100">
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 40px;">#</th>
                                 <th>Nama Kategori</th>
                                 <th>Slug</th>
-                                <th>Jumlah Tugas</th>
+                                <th>Tugas Terkait</th>
                                 <th>Deskripsi</th>
                                 <th class="text-center" style="width: 90px;">Aksi</th>
                             </tr>
@@ -107,7 +113,7 @@
                                             </button>
                                         </div>
 
-                                        <!-- Edit Modal -->
+                                        
                                         <div class="modal fade text-start" id="editModal{{ $cat->id }}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
@@ -148,7 +154,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Delete Modal -->
+                                        
                                         <div class="modal fade text-start" id="deleteCatModal{{ $cat->id }}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm">
                                                 <div class="modal-content text-center p-4">
@@ -181,3 +187,34 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    
+    <script src="/admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/admin/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/admin/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/admin/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#categories-datatable').DataTable({
+                language: {
+                    search: "Cari Kategori:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ s/d _END_ dari _TOTAL_ kategori",
+                    infoEmpty: "Menampilkan 0 data",
+                    infoFiltered: "(disaring dari _MAX_ data)",
+                    zeroRecords: "Tidak ada kategori yang cocok",
+                    paginate: {
+                        first: "Awal",
+                        last: "Akhir",
+                        next: "Berikutnya",
+                        previous: "Sebelumnya"
+                    }
+                },
+                pageLength: 10,
+                responsive: true
+            });
+        });
+    </script>
+@endpush

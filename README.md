@@ -8,6 +8,7 @@ Aplikasi web manajemen tugas berbasis **Laravel 12** yang dibuat untuk memenuhi 
 
 ### 1. Fitur Pengguna (User)
 - **Autentikasi**: Registrasi akun baru, Login dengan session & remember me, dan Logout.
+- **Profil Pengguna**: Ubah nama, email, dan kata sandi (*current password verification*).
 - **Dashboard Ringkasan**:
   - Total tugas, tugas belum dimulai, sedang dikerjakan, dan selesai.
   - Peringatan tugas yang melewati tenggat waktu (*Overdue*).
@@ -20,18 +21,22 @@ Aplikasi web manajemen tugas berbasis **Laravel 12** yang dibuat untuk memenuhi 
   - Mengubah data tugas.
   - Menghapus tugas dengan modal konfirmasi.
   - Mengubah status tugas secara cepat (*quick status toggle*).
-- **Pencarian & Filter**:
+  - Label tenggat waktu cerdas (*Hari Ini*, *Besok*, *X hari lagi*, *Terlewat*).
+- **Pencarian, Filter & Ekspor**:
   - Pencarian berdasarkan judul atau isi deskripsi tugas.
   - Filter berdasarkan status (`belum dimulai`, `dikerjakan`, `selesai`, `overdue`).
   - Filter berdasarkan prioritas (`rendah`, `sedang`, `tinggi`).
   - Filter berdasarkan kategori tugas.
   - Pengurutan data (terbaru, terlama, deadline terdekat, prioritas tertinggi).
+  - **Ekspor CSV**: Unduh seluruh daftar tugas atau hasil filter ke dalam format file spreadsheet CSV/Excel.
 - **Pembatasan Akses (Authorization)**:
   - Menggunakan `TaskPolicy` untuk memastikan pengguna hanya dapat melihat, mengedit, dan menghapus tugas miliknya sendiri. Akses URL ID pengguna lain otomatis diblokir (`403 Forbidden`).
 
 ### 2. Fitur Tambahan (Kategori & Admin)
 - **Kategori Tugas**: Pengelolaan kategori dengan label warna badge.
-- **Menu Administrator**: Monitoring seluruh tugas pegawai dan rekapitulasi beban kerja tiap pengguna.
+- **Menu Administrator**:
+  - Monitoring seluruh tugas pegawai dengan fitur filter, ubah status cepat, dan **Ekspor CSV Semua Tugas**.
+  - Rekapitulasi beban kerja dan produktivitas tiap pengguna menggunakan DataTables interaktif dan **Ekspor CSV Rekapitulasi**.
 
 ---
 
@@ -84,9 +89,9 @@ Data akun berikut telah disiapkan otomatis melalui database seeder:
 
 | Nama Pengguna | Email | Password | Role / Keterangan |
 | :--- | :--- | :--- | :--- |
-| **Budi Santoso** | `budi@example.com` | `password` | User (Mengelola tugas pribadi) |
-| **Siti Rahmawati** | `siti@example.com` | `password` | User (Untuk uji isolasi data antar pengguna) |
-| **Administrator** | `admin@example.com` | `password` | Admin (Akses seluruh tugas & rekapitulasi) |
+| **Dika** | `dika@example.com` | `password` | User (Mengelola tugas pribadi & proyek akhir) |
+| **Radnet Operator** | `radnet@example.com` | `password` | User (Mengelola tugas infrastruktur & jaringan ISP Radnet) |
+| **Inixindo Administrator** | `inixindo@example.com` | `password` | Admin (Akses seluruh tugas pegawai & rekapitulasi pelatihan) |
 
 *(Tersedia tombol 1-Click login demo pada halaman login untuk mempermudah demonstrasi pengujian)*.
 

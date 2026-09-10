@@ -6,7 +6,7 @@
     <h4 class="mt-0">Daftar Akun Baru</h4>
     <p class="text-muted mb-4">Buat akun untuk mulai mengelola dan memantau tugas-tugas Anda dengan mudah.</p>
 
-    <!-- form -->
+    
     <form action="{{ route('register') }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -38,9 +38,9 @@
             <button class="btn btn-primary" type="submit"><i class="ri-user-add-line me-1"></i> Daftar Sekarang</button>
         </div>
     </form>
-    <!-- end form-->
+    
 
-    <!-- Footer-->
+    
     <footer class="footer footer-alt mt-4">
         <p class="text-muted">Sudah memiliki akun? <a href="{{ route('login') }}" class="text-primary fw-semibold ms-1">Masuk ke akun Anda</a></p>
     </footer>

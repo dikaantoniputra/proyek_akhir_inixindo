@@ -8,17 +8,17 @@
     <meta content="Aplikasi Manajemen Tugas Pegawai berbasis Laravel" name="description" />
     <meta content="TaskApp" name="author" />
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
+    
+    <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
 
-    <!-- Theme Config Js -->
-    <script src="{{ asset('admin/assets/js/config.js') }}"></script>
+    
+    <script src="/admin/assets/js/config.js"></script>
 
-    <!-- App css -->
-    <link href="{{ asset('admin/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    
+    <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
-    <!-- Icons css -->
-    <link href="{{ asset('admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    
+    <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     @stack('styles')
 </head>
@@ -26,32 +26,32 @@
 <body class="authentication-bg pb-0">
 
     <div class="auth-fluid">
-        <!-- Auth fluid right content -->
+        
         <div class="auth-fluid-right text-center">
             <div class="auth-user-testimonial">
                 <h2 class="mb-3 text-white">Kelola Tugas Lebih Mudah & Terstruktur</h2>
                 <p class="lead"><i class="ri-double-quotes-l"></i> Tingkatkan produktivitas kerja dengan memantau tenggat waktu, menentukan prioritas, dan menyelesaikan tugas tepat waktu. <i class="ri-double-quotes-r"></i></p>
                 <h5 class="text-white">- Mini Project Laravel 12</h5>
-            </div> <!-- end auth-user-testimonial-->
+            </div> 
         </div>
-        <!-- end Auth fluid right content -->
+        
 
-        <!--Auth fluid left content -->
+        
         <div class="auth-fluid-form-box">
             <div class="card-body d-flex flex-column h-100 gap-3">
 
-                <!-- Logo -->
+                
                 <div class="auth-brand text-center text-lg-start">
                     <a href="{{ url('/') }}" class="logo-dark">
-                        <span><img src="{{ asset('admin/assets/images/logo-dark.png') }}" alt="dark logo" height="26"></span>
+                        <span><img src="/admin/assets/images/logo-dark.png" alt="dark logo" height="26"></span>
                     </a>
                     <a href="{{ url('/') }}" class="logo-light">
-                        <span><img src="{{ asset('admin/assets/images/logo.png') }}" alt="logo" height="26"></span>
+                        <span><img src="/admin/assets/images/logo.png" alt="logo" height="26"></span>
                     </a>
                 </div>
 
                 <div class="my-auto">
-                    <!-- Notifications -->
+                    
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="ri-check-line me-1 align-middle"></i>
@@ -62,7 +62,7 @@
 
                     @if(session('error'))
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="ri-error-warning-line me-1 align-middle"></i>
+                            <i class="ri-error-warning-line me-1 align-middle fs-16"></i>
                             {{ session('error') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
@@ -70,6 +70,7 @@
 
                     @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="ri-alert-line me-1 align-middle fs-16"></i>
                             <ul class="mb-0 ps-3">
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -79,25 +80,26 @@
                         </div>
                     @endif
 
+                    
                     @yield('content')
                 </div>
 
-                <!-- Footer-->
+                
                 <footer class="footer footer-alt">
                     <p class="text-muted mb-0">{{ date('Y') }} &copy; TaskApp - Mini Project Laravel</p>
                 </footer>
 
-            </div> <!-- end .card-body -->
+            </div> 
         </div>
-        <!-- end .auth-fluid-form-box-->
+        
     </div>
-    <!-- end auth-fluid-->
+    
 
-    <!-- Vendor js -->
-    <script src="{{ asset('admin/assets/js/vendor.min.js') }}"></script>
+    
+    <script src="/admin/assets/js/vendor.min.js"></script>
 
-    <!-- App js -->
-    <script src="{{ asset('admin/assets/js/app.min.js') }}"></script>
+    
+    <script src="/admin/assets/js/app.min.js"></script>
 
     @stack('scripts')
 

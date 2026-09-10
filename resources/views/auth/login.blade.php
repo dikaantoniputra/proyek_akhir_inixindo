@@ -6,7 +6,7 @@
     <h4 class="mt-0">Masuk ke Akun Anda</h4>
     <p class="text-muted mb-4">Silakan masukkan email dan kata sandi untuk mengakses TaskApp.</p>
 
-    <!-- form -->
+    
     <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -33,26 +33,26 @@
             <button class="btn btn-primary" type="submit"><i class="ri-login-box-line me-1"></i> Masuk</button>
         </div>
     </form>
-    <!-- end form-->
+    
 
-    <!-- Demo Account Helpers -->
+    
     <div class="mt-4 p-3 bg-light rounded border">
         <h6 class="fs-12 fw-bold text-muted text-uppercase mb-2"><i class="ri-shield-keyhole-line me-1"></i> Akun Uji Coba (Demo 1-Klik):</h6>
         <div class="d-flex flex-wrap gap-2">
-            <button type="button" class="btn btn-sm btn-outline-primary" onclick="fillCredentials('budi@example.com', 'password')">
-                <i class="ri-user-line me-1"></i> Budi (User)
+            <button type="button" class="btn btn-sm btn-outline-primary" onclick="fillCredentials('dika@example.com', 'password')">
+                <i class="ri-user-line me-1"></i> Dika (User)
             </button>
-            <button type="button" class="btn btn-sm btn-outline-info" onclick="fillCredentials('siti@example.com', 'password')">
-                <i class="ri-user-line me-1"></i> Siti (User)
+            <button type="button" class="btn btn-sm btn-outline-info" onclick="fillCredentials('radnet@example.com', 'password')">
+                <i class="ri-user-line me-1"></i> Radnet (User)
             </button>
-            <button type="button" class="btn btn-sm btn-outline-danger" onclick="fillCredentials('admin@example.com', 'password')">
-                <i class="ri-shield-user-line me-1"></i> Admin
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="fillCredentials('inixindo@example.com', 'password')">
+                <i class="ri-shield-user-line me-1"></i> Inixindo (Admin)
             </button>
         </div>
         <small class="text-muted d-block mt-2 fs-11">Password bawaan: <code>password</code></small>
     </div>
 
-    <!-- Footer-->
+    
     <footer class="footer footer-alt mt-4">
         <p class="text-muted">Belum memiliki akun? <a href="{{ route('register') }}" class="text-primary fw-semibold ms-1">Daftar di sini</a></p>
     </footer>

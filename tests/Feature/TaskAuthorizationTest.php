@@ -16,7 +16,7 @@ class TaskAuthorizationTest extends TestCase
         $userA = User::factory()->create(['name' => 'User A']);
         $userB = User::factory()->create(['name' => 'User B']);
 
-        // Tugas milik User B
+        
         $taskB = Task::create([
             'user_id' => $userB->id,
             'title' => 'Tugas Rahasia User B',
@@ -24,10 +24,10 @@ class TaskAuthorizationTest extends TestCase
             'status' => 'belum dimulai',
         ]);
 
-        // User A mencoba melihat tugas User B
+        
         $response = $this->actingAs($userA)->get("/tasks/{$taskB->id}");
 
-        // Harus mendapatkan status 403 Forbidden
+        
         $response->assertStatus(403);
     }
 
@@ -43,7 +43,7 @@ class TaskAuthorizationTest extends TestCase
             'status' => 'belum dimulai',
         ]);
 
-        // User A mencoba membuka halaman edit tugas User B
+        
         $response = $this->actingAs($userA)->get("/tasks/{$taskB->id}/edit");
         $response->assertStatus(403);
     }
@@ -60,7 +60,7 @@ class TaskAuthorizationTest extends TestCase
             'status' => 'belum dimulai',
         ]);
 
-        // User A mencoba mengupdate tugas User B
+        
         $response = $this->actingAs($userA)->put("/tasks/{$taskB->id}", [
             'title' => 'Diubah oleh User A',
             'priority' => 'rendah',
@@ -86,7 +86,7 @@ class TaskAuthorizationTest extends TestCase
             'status' => 'belum dimulai',
         ]);
 
-        // User A mencoba menghapus tugas User B
+        
         $response = $this->actingAs($userA)->delete("/tasks/{$taskB->id}");
 
         $response->assertStatus(403);
@@ -105,7 +105,7 @@ class TaskAuthorizationTest extends TestCase
             'status' => 'belum dimulai',
         ]);
 
-        // User A mencoba update status tugas User B
+        
         $response = $this->actingAs($userA)->patch("/tasks/{$taskB->id}/status", [
             'status' => 'selesai',
         ]);

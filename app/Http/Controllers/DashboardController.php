@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Tampilkan halaman dashboard utama.
-     */
+    
     public function index()
     {
         $user = Auth::user();
 
-        // Query tugas milik user yang sedang login
+        
         $taskQuery = Task::where('user_id', $user->id);
 
         $totalTasks = (clone $taskQuery)->count();
@@ -24,10 +22,10 @@ class DashboardController extends Controller
         $inProgressTasks = (clone $taskQuery)->where('status', 'dikerjakan')->count();
         $completedTasks = (clone $taskQuery)->where('status', 'selesai')->count();
         
-        // Tugas yang melewati tenggat (belum selesai dan tanggal < hari ini)
+        
         $overdueTasks = (clone $taskQuery)->overdue()->count();
 
-        // Daftar tugas yang mendekati tenggat (7 hari ke depan)
+        
         $upcomingTasks = (clone $taskQuery)
             ->where('status', '!=', 'selesai')
             ->whereNotNull('due_date')
@@ -38,14 +36,19 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        // 5 Tugas terbaru
+        
         $recentTasks = (clone $taskQuery)
             ->with('category')
             ->latest()
             ->take(5)
             ->get();
 
-        // Persentase penyelesaian
+        
+        $priorityHighCount = (clone $taskQuery)->where('priority', 'tinggi')->count();
+        $priorityMediumCount = (clone $taskQuery)->where('priority', 'sedang')->count();
+        $priorityLowCount = (clone $taskQuery)->where('priority', 'rendah')->count();
+
+        
         $completionRate = $totalTasks > 0 ? round(($completedTasks / $totalTasks) * 100) : 0;
 
         return view('dashboard', compact(
@@ -56,7 +59,10 @@ class DashboardController extends Controller
             'overdueTasks',
             'upcomingTasks',
             'recentTasks',
-            'completionRate'
+            'completionRate',
+            'priorityHighCount',
+            'priorityMediumCount',
+            'priorityLowCount'
         ));
     }
 }

@@ -9,17 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    /**
-     * Tampilkan halaman login.
-     */
+    
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Proses autentikasi login.
-     */
+    
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -44,17 +40,13 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    /**
-     * Tampilkan halaman pendaftaran akun baru.
-     */
+    
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
-    /**
-     * Proses pendaftaran akun baru.
-     */
+    
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -84,9 +76,7 @@ class AuthController extends Controller
             ->with('success', 'Pendaftaran akun berhasil! Selamat datang di Aplikasi Manajemen Tugas.');
     }
 
-    /**
-     * Logout pengguna dari aplikasi.
-     */
+    
     public function logout(Request $request)
     {
         Auth::logout();

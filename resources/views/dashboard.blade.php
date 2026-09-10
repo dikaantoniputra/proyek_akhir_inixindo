@@ -8,9 +8,37 @@
 @endsection
 
 @section('content')
-<!-- Row 1: KPI Cards (Attex Flat Widgets) -->
+
+@if(Auth::user()->isAdmin())
+    <div class="card bg-primary-subtle border-primary-subtle border mb-4">
+        <div class="card-body p-3">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="avatar-sm flex-shrink-0">
+                        <span class="avatar-title bg-primary text-white rounded-3 fs-20">
+                            <i class="ri-shield-star-line"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h5 class="my-0 fw-bold text-primary">Mode Administrator Aktif</h5>
+                        <p class="mb-0 text-muted fs-13">Anda memiliki hak akses penuh untuk memantau tugas seluruh pegawai dan rekap beban kerja organisasi.</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ route('admin.tasks') }}" class="btn btn-primary btn-sm">
+                        <i class="ri-file-list-3-line me-1"></i> Semua Tugas Pegawai
+                    </a>
+                    <a href="{{ route('admin.users') }}" class="btn btn-outline-primary btn-sm bg-white">
+                        <i class="ri-user-star-line me-1"></i> Rekap Penggunaan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
 <div class="row g-3 mb-4">
-    <!-- Total Tugas -->
+    
     <div class="col-xxl-3 col-md-6">
         <div class="card widget-flat h-100 mb-0">
             <div class="card-body">
@@ -31,7 +59,7 @@
         </div>
     </div>
 
-    <!-- Belum Dimulai -->
+    
     <div class="col-xxl-3 col-md-6">
         <div class="card widget-flat h-100 mb-0">
             <div class="card-body">
@@ -52,7 +80,7 @@
         </div>
     </div>
 
-    <!-- Sedang Dikerjakan -->
+    
     <div class="col-xxl-3 col-md-6">
         <div class="card widget-flat h-100 mb-0">
             <div class="card-body">
@@ -73,7 +101,7 @@
         </div>
     </div>
 
-    <!-- Selesai -->
+    
     <div class="col-xxl-3 col-md-6">
         <div class="card widget-flat h-100 mb-0">
             <div class="card-body">
@@ -95,7 +123,6 @@
     </div>
 </div>
 
-<!-- Row 2: Overdue Alert (if any) -->
 @if($overdueTasks > 0)
     <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center mb-4" role="alert">
         <i class="ri-alarm-warning-fill fs-20 me-2"></i>
@@ -109,24 +136,69 @@
     </div>
 @endif
 
-<!-- Row 3: Progress Breakdown & Upcoming Tasks -->
+<div class="row g-4 mb-4">
+    
+    <div class="col-lg-6">
+        <div class="card h-100 mb-0">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="header-title mb-0">
+                    <i class="ri-pie-chart-2-line me-1 text-primary"></i> Distribusi Status Tugas
+                </h4>
+                <span class="badge bg-primary-subtle text-primary fs-12 px-2 py-1">{{ $totalTasks }} Total Tugas</span>
+            </div>
+            <div class="card-body">
+                @if($totalTasks > 0)
+                    <div id="status-donut-chart" class="apex-charts" style="min-height: 260px;"></div>
+                @else
+                    <div class="text-center py-4 text-muted">
+                        <i class="ri-pie-chart-line fs-36 text-secondary d-block mb-2"></i>
+                        Belum ada data tugas untuk ditampilkan pada grafik.
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-6">
+        <div class="card h-100 mb-0">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="header-title mb-0">
+                    <i class="ri-bar-chart-2-line me-1 text-warning"></i> Distribusi Prioritas Tugas
+                </h4>
+                <span class="badge bg-warning-subtle text-warning fs-12 px-2 py-1">Tingkat Urgensi</span>
+            </div>
+            <div class="card-body">
+                @if($totalTasks > 0)
+                    <div id="priority-bar-chart" class="apex-charts" style="min-height: 260px;"></div>
+                @else
+                    <div class="text-center py-4 text-muted">
+                        <i class="ri-bar-chart-line fs-36 text-secondary d-block mb-2"></i>
+                        Belum ada data prioritas tugas untuk ditampilkan.
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row g-4">
-    <!-- Progress & Overview -->
+    
     <div class="col-xl-4 col-lg-5">
         <div class="card h-100 mb-0">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="header-title mb-0">Progres Penyelesaian</h4>
+                <h4 class="header-title mb-0">Ringkasan Progres</h4>
                 <span class="badge bg-success-subtle text-success fs-12 px-2 py-1">{{ $completionRate }}% Selesai</span>
             </div>
             <div class="card-body">
-                <!-- Stacked Progress -->
+                
                 <div class="progress mb-4" style="height: 10px;">
                     <div class="progress-bar bg-success" role="progressbar" style="width: {{ $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0 }}%" title="Selesai"></div>
                     <div class="progress-bar bg-info" role="progressbar" style="width: {{ $totalTasks > 0 ? ($inProgressTasks / $totalTasks) * 100 : 0 }}%" title="Dikerjakan"></div>
                     <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ $totalTasks > 0 ? ($pendingTasks / $totalTasks) * 100 : 0 }}%" title="Belum Dimulai"></div>
                 </div>
 
-                <!-- Breakdown Items -->
+                
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center justify-content-between p-2 border rounded">
                         <div class="d-flex align-items-center gap-2">
@@ -162,7 +234,7 @@
         </div>
     </div>
 
-    <!-- Upcoming Tasks Table -->
+    
     <div class="col-xl-8 col-lg-7">
         <div class="card h-100 mb-0">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -243,7 +315,6 @@
     </div>
 </div>
 
-<!-- Row 4: Recent Tasks -->
 <div class="row mt-4">
     <div class="col-12">
         <div class="card mb-0">
@@ -315,3 +386,109 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if($totalTasks > 0)
+            // 1. Donut Chart Status
+            var statusChartOptions = {
+                chart: {
+                    type: 'donut',
+                    height: 260,
+                    fontFamily: 'inherit'
+                },
+                series: [{{ $completedTasks }}, {{ $inProgressTasks }}, {{ $pendingTasks }}],
+                labels: ['Selesai', 'Sedang Dikerjakan', 'Belum Dimulai'],
+                colors: ['#0acf97', '#39afd1', '#6c757d'],
+                legend: {
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    fontSize: '13px'
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val, opts) {
+                        return opts.w.config.series[opts.seriesIndex];
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return value + " Tugas";
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '65%',
+                            labels: {
+                                show: true,
+                                total: {
+                                    show: true,
+                                    label: 'Total Tugas',
+                                    fontSize: '13px',
+                                    color: '#6c757d',
+                                    formatter: function () {
+                                        return "{{ $totalTasks }}";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            var statusChart = new ApexCharts(document.querySelector("#status-donut-chart"), statusChartOptions);
+            statusChart.render();
+
+            // 2. Bar Chart Priority
+            var priorityChartOptions = {
+                chart: {
+                    type: 'bar',
+                    height: 260,
+                    toolbar: { show: false },
+                    fontFamily: 'inherit'
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 6,
+                        horizontal: false,
+                        columnWidth: '45%',
+                        distributed: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    style: { fontSize: '12px', fontWeight: 'bold' }
+                },
+                series: [{
+                    name: 'Jumlah Tugas',
+                    data: [{{ $priorityHighCount }}, {{ $priorityMediumCount }}, {{ $priorityLowCount }}]
+                }],
+                xaxis: {
+                    categories: ['Tinggi', 'Sedang', 'Rendah'],
+                    labels: { style: { fontSize: '12px' } }
+                },
+                yaxis: {
+                    show: false
+                },
+                colors: ['#fa5c7c', '#ffbc00', '#39afd1'],
+                legend: {
+                    show: false
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return value + " Tugas";
+                        }
+                    }
+                }
+            };
+            var priorityChart = new ApexCharts(document.querySelector("#priority-bar-chart"), priorityChartOptions);
+            priorityChart.render();
+        @endif
+    });
+</script>
+@endpush

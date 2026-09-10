@@ -6,19 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class TaskRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    
     public function rules(): array
     {
         return [
@@ -28,12 +22,12 @@ class TaskRequest extends FormRequest
             'status' => 'required|in:belum dimulai,dikerjakan,selesai',
             'due_date' => 'nullable|date',
             'category_id' => 'nullable|exists:categories,id',
+            'attachment' => 'nullable|file|max:10240|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,7z,jpg,jpeg,png,webp,txt,csv',
+            'remove_attachment' => 'nullable|boolean',
         ];
     }
 
-    /**
-     * Custom validation messages in Indonesian.
-     */
+    
     public function messages(): array
     {
         return [
@@ -45,6 +39,9 @@ class TaskRequest extends FormRequest
             'status.in' => 'Status yang dipilih tidak valid.',
             'due_date.date' => 'Tanggal tenggat harus berupa tanggal yang valid.',
             'category_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'attachment.file' => 'Berkas lampiran harus berupa file yang valid.',
+            'attachment.max' => 'Ukuran berkas lampiran maksimal 10 MB.',
+            'attachment.mimes' => 'Format berkas harus berupa PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, ZIP, RAR, JPG, PNG, WEBP, TXT, atau CSV.',
         ];
     }
 }

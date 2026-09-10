@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<!-- Metric Summary Cards -->
+
 <div class="row g-3 mb-4">
     <div class="col-xxl-3 col-sm-6">
         <div class="card widget-flat h-100 mb-0">
@@ -80,21 +80,27 @@
 <div class="row">
     <div class="col-12">
         <div class="card mb-0">
-            <!-- Card Header with Action & Filter Form -->
+            
             <div class="card-header border-bottom">
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
                     <div>
                         <h4 class="header-title mb-0">Data Tugas</h4>
                         <p class="text-muted fs-13 mb-0">Kelola dan pantau seluruh tugas pekerjaan Anda.</p>
                     </div>
-                    <div>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('tasks.kanban') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm">
+                            <i class="ri-artboard-2-line me-1"></i> Papan Kanban
+                        </a>
+                        <a href="{{ route('tasks.export', request()->query()) }}" class="btn btn-outline-success btn-sm" title="Unduh data tugas saat ini sebagai file CSV/Excel">
+                            <i class="ri-file-excel-line me-1"></i> Ekspor CSV
+                        </a>
                         <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm">
                             <i class="ri-add-line me-1"></i> Tambah Tugas Baru
                         </a>
                     </div>
                 </div>
 
-                <!-- Filter Controls -->
+                
                 <form action="{{ route('tasks.index') }}" method="GET" class="p-2 bg-light rounded">
                     <div class="row g-2 align-items-center">
                         <div class="col-lg-3 col-md-6 col-12">
@@ -158,7 +164,7 @@
             </div>
 
             <div class="card-body p-0">
-                <!-- Table -->
+                
                 <div class="table-responsive">
                     <table class="table table-hover table-centered mb-0 align-middle">
                         <thead class="table-light">
@@ -181,13 +187,29 @@
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column">
-                                            <a href="{{ route('tasks.show', $task) }}" class="text-body fw-bold text-truncate" style="max-width: 280px;">
-                                                {{ $task->title }}
-                                            </a>
+                                            <div class="d-flex align-items-center gap-1">
+                                                <a href="{{ route('tasks.show', $task) }}" class="text-body fw-bold text-truncate" style="max-width: 280px;">
+                                                    {{ $task->title }}
+                                                </a>
+                                                @if($task->has_attachment)
+                                                    <span class="badge bg-light text-primary border fs-10 px-1 py-0" title="Lampiran: {{ $task->attachment_name }} ({{ $task->attachment_size_formatted }})">
+                                                        <i class="ri-attachment-2"></i>
+                                                    </span>
+                                                @endif
+                                            </div>
                                             @if($task->description)
                                                 <small class="text-muted text-truncate" style="max-width: 280px;">
                                                     {{ $task->description }}
                                                 </small>
+                                            @endif
+                                            @if($task->total_checklists_count > 0)
+                                                <div class="d-flex align-items-center gap-2 mt-1" style="max-width: 200px;">
+                                                    <div class="progress flex-grow-1" style="height: 4px;">
+                                                        <div class="progress-bar {{ $task->checklist_progress_percentage == 100 ? 'bg-success' : 'bg-primary' }}" 
+                                                             style="width: {{ $task->checklist_progress_percentage }}%;"></div>
+                                                    </div>
+                                                    <small class="text-muted fs-10 fw-semibold">{{ $task->completed_checklists_count }}/{{ $task->total_checklists_count }}</small>
+                                                </div>
                                             @endif
                                         </div>
                                     </td>
@@ -206,7 +228,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <!-- Quick Status Dropdown -->
+                                        
                                         <div class="dropdown">
                                             <button class="btn btn-sm dropdown-toggle {{ $task->status_badge_class }} py-0 px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 {{ ucfirst($task->status) }}
@@ -247,16 +269,14 @@
                                     </td>
                                     <td>
                                         @if($task->due_date)
-                                            <span class="fs-12 {{ $task->is_overdue ? 'text-danger fw-bold' : 'text-body' }}">
-                                                {{ $task->due_date->translatedFormat('d M Y') }}
-                                            </span>
-                                            @if($task->is_overdue)
-                                                <span class="badge bg-danger-subtle text-danger d-block fs-10 mt-1" style="width: fit-content;">
-                                                    Terlewat ({{ $task->due_date->diffForHumans() }})
+                                            <div class="d-flex flex-column gap-1">
+                                                <span class="fs-12 fw-semibold {{ $task->is_overdue ? 'text-danger' : 'text-body' }}">
+                                                    <i class="ri-calendar-event-line me-1 text-muted"></i>{{ $task->due_date->translatedFormat('d M Y') }}
                                                 </span>
-                                            @else
-                                                <small class="text-muted d-block fs-11">{{ $task->due_date->diffForHumans() }}</small>
-                                            @endif
+                                                <span class="{{ $task->due_date_badge }}" style="width: fit-content;">
+                                                    {{ $task->due_date_label }}
+                                                </span>
+                                            </div>
                                         @else
                                             <span class="text-muted fs-12">-</span>
                                         @endif
@@ -277,7 +297,7 @@
                                             </button>
                                         </div>
 
-                                        <!-- Delete Modal -->
+                                        
                                         <div class="modal fade" id="deleteModal{{ $task->id }}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm">
                                                 <div class="modal-content text-start">

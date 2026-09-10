@@ -14,209 +14,239 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database with rich, realistic data.
-     */
+    
     public function run(): void
     {
-        // 1. Akun Pengguna & Admin
+        
         $admin = User::create([
-            'name' => 'Administrator TaskApp',
-            'email' => 'admin@example.com',
+            'name' => 'Inixindo Administrator',
+            'email' => 'inixindo@example.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
         ]);
 
-        $budi = User::create([
-            'name' => 'Budi Santoso',
-            'email' => 'budi@example.com',
+        $dika = User::create([
+            'name' => 'Dika',
+            'email' => 'dika@example.com',
             'password' => Hash::make('password'),
             'role' => 'user',
         ]);
 
-        $siti = User::create([
-            'name' => 'Siti Rahmawati',
-            'email' => 'siti@example.com',
+        $radnet = User::create([
+            'name' => 'Radnet Operator',
+            'email' => 'radnet@example.com',
             'password' => Hash::make('password'),
             'role' => 'user',
         ]);
 
-        // 2. Kategori Tugas
+        
+        $catInixindo = Category::create([
+            'name' => 'Pelatihan Inixindo',
+            'slug' => 'pelatihan-inixindo',
+            'color' => 'primary',
+            'description' => 'Materi pelatihan pemrograman Laravel, penyusunan proyek akhir, ujian sertifikasi, dan evaluasi peserta di Inixindo.',
+        ]);
+
+        $catRadnet = Category::create([
+            'name' => 'Infrastruktur Radnet',
+            'slug' => 'infrastruktur-radnet',
+            'color' => 'info',
+            'description' => 'Manajemen jaringan ISP Radnet, monitoring bandwidth, routing BGP, dan pemeliharaan server cloud.',
+        ]);
+
         $catDev = Category::create([
             'name' => 'Software Development',
             'slug' => 'software-development',
-            'color' => 'primary',
-            'description' => 'Aktivitas perancangan arsitektur sistem, pemrograman frontend & backend, serta integrasi API.',
-        ]);
-
-        $catDesign = Category::create([
-            'name' => 'UI/UX & Branding',
-            'slug' => 'ui-ux-branding',
-            'color' => 'info',
-            'description' => 'Perancangan wireframe, mockup aplikasi, ilustrasi visual, dan perbaikan antarmuka pengguna.',
-        ]);
-
-        $catOps = Category::create([
-            'name' => 'Operasional & Bisnis',
-            'slug' => 'operasional-bisnis',
             'color' => 'success',
-            'description' => 'Laporan keuangan bulanan, koordinasi klien, evaluasi SOP, dan administrasi perkantoran.',
+            'description' => 'Pengembangan fitur aplikasi TaskApp, pembuatan API, pengujian otomatis, dan integrasi UI Attex.',
         ]);
 
         $catUrgent = Category::create([
             'name' => 'Insiden & Maintenance',
             'slug' => 'insiden-maintenance',
             'color' => 'danger',
-            'description' => 'Penanganan bug kritis, patching keamanan server, dan perpanjangan infrastruktur cloud.',
+            'description' => 'Penanganan gangguan jaringan mendesak, perbaikan bug darurat, dan patching keamanan server.',
         ]);
 
-        $catMarketing = Category::create([
-            'name' => 'Pemasaran Digital',
-            'slug' => 'pemasaran-digital',
+        $catOps = Category::create([
+            'name' => 'Operasional & Bisnis',
+            'slug' => 'operasional-bisnis',
             'color' => 'warning',
-            'description' => 'Kampanye media sosial, konten edukasi, SEO, dan analisis pertumbuhan pengguna.',
+            'description' => 'Laporan kinerja harian, koordinasi tim teknis, administrasi SOP, dan layanan pelanggan.',
         ]);
 
-        // 3. Tugas untuk Budi Santoso (Fullstack Developer & Team Lead)
+        
         Task::create([
-            'user_id' => $budi->id,
-            'category_id' => $catDev->id,
-            'title' => 'Implementasi Authentication & Role-Based Policy',
-            'description' => 'Membangun fitur login, registrasi, session guard, dan policy otorisasi ketat agar user hanya bisa mengelola tugas miliknya sendiri.',
+            'user_id' => $dika->id,
+            'category_id' => $catInixindo->id,
+            'title' => 'Menyelesaikan Proyek Akhir Pelatihan Web Laravel Inixindo',
+            'description' => 'Menuntaskan aplikasi manajemen tugas TaskApp dengan fitur lengkap (Auth, CRUD, Kategori, Sub-Tugas, Kanban Board, dan Lampiran Berkas) sesuai standar kurikulum Inixindo.',
             'priority' => 'tinggi',
             'status' => 'selesai',
-            'due_date' => Carbon::today()->subDays(4),
+            'due_date' => Carbon::today()->subDays(3),
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
+            'user_id' => $dika->id,
             'category_id' => $catDev->id,
-            'title' => 'Integrasi Template Admin Attex Bootstrap 5 ke Blade Views',
-            'description' => 'Menata aset CSS, JavaScript plugins, ikon RemixIcon, dan membuat master layout modular untuk dashboard dan form tasks.',
+            'title' => 'Integrasi Template Admin Attex Bootstrap 5 ke Blade Layout',
+            'description' => 'Menata layout antarmuka dashboard, sidebar menu, formulir input modern, dan komponen kartu tugas agar profesional dan responsif di berbagai perangkat.',
             'priority' => 'tinggi',
             'status' => 'selesai',
             'due_date' => Carbon::today()->subDays(2),
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
+            'user_id' => $dika->id,
             'category_id' => $catDev->id,
-            'title' => 'Penyusunan Form Request Validation Bahasa Indonesia',
-            'description' => 'Membuat validasi kustom untuk judul tugas, status enum, prioritas, dan tanggal deadline dengan pesan feedback yang ramah pengguna.',
-            'priority' => 'sedang',
+            'title' => 'Implementasi Fitur Papan Kanban & Drag-and-Drop Interaktif',
+            'description' => 'Membangun visualisasi kartu tugas berbasis status (Belum Mulai, Sedang Dikerjakan, Selesai) lengkap dengan perpindahan status real-time via AJAX.',
+            'priority' => 'tinggi',
             'status' => 'selesai',
             'due_date' => Carbon::today()->subDays(1),
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
-            'category_id' => $catOps->id,
-            'title' => 'Menyusun Laporan Evaluasi Kinerja Sprint & KPI Tim',
-            'description' => 'Mengumpulkan data velocity sprint, issue resolution time, dan menyajikan ringkasan untuk bahan evaluasi mingguan manajemen.',
-            'priority' => 'tinggi',
+            'user_id' => $dika->id,
+            'category_id' => $catInixindo->id,
+            'title' => 'Penyusunan Dokumentasi Teknis & Panduan Penggunaan Aplikasi',
+            'description' => 'Membuat dokumen README komprehensif, daftar akun demo, panduan instalasi lokal, serta arsitektur database untuk diserahkan ke instruktur Inixindo.',
+            'priority' => 'sedang',
             'status' => 'dikerjakan',
             'due_date' => Carbon::today()->addDays(2),
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
-            'category_id' => $catDev->id,
-            'title' => 'Optimasi Query Database & Pagination Daftar Tugas',
-            'description' => 'Menambahkan query scope untuk filter multi-kriteria (status, prioritas, kategori) dan indexing foreign key user_id.',
+            'user_id' => $dika->id,
+            'category_id' => $catRadnet->id,
+            'title' => 'Optimasi API Gateway & Koneksi Database Server Radnet',
+            'description' => 'Melakukan tuning query Eloquent, indexing database SQLite/MySQL, dan caching respon untuk mempercepat response time sistem.',
             'priority' => 'sedang',
             'status' => 'dikerjakan',
             'due_date' => Carbon::today()->addDays(3),
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
+            'user_id' => $dika->id,
             'category_id' => $catUrgent->id,
-            'title' => 'Perpanjangan Sertifikat SSL & Langganan Server Database',
-            'description' => 'Melakukan pembayaran tagihan server staging cloud dan update wildcard SSL certificate sebelum expired.',
+            'title' => 'Pembaruan Sertifikat SSL Wildcard Server TaskApp Radnet',
+            'description' => 'Memperbarui sertifikat HTTPS Let\'s Encrypt pada domain staging dan mengonfigurasi auto-renewal script.',
             'priority' => 'tinggi',
             'status' => 'belum dimulai',
-            'due_date' => Carbon::today()->subDays(2), // Overdue
+            'due_date' => Carbon::today()->subDays(2), 
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
-            'category_id' => $catDesign->id,
-            'title' => 'Redesain Komponen Modal Konfirmasi Hapus Data',
-            'description' => 'Mempercantik modal dialog hapus tugas menggunakan icon peringatan dan transisi fade halus khas tema Attex.',
+            'user_id' => $dika->id,
+            'category_id' => $catInixindo->id,
+            'title' => 'Persiapan Presentasi & Demo Proyek Akhir di Hadapan Penguji',
+            'description' => 'Menyiapkan slide presentasi materi, skenario demo fitur utama, pengujian login role admin/user, dan rekaman video aplikasi.',
             'priority' => 'rendah',
             'status' => 'belum dimulai',
             'due_date' => Carbon::today()->addDays(5),
         ]);
 
         Task::create([
-            'user_id' => $budi->id,
+            'user_id' => $dika->id,
             'category_id' => $catOps->id,
-            'title' => 'Penyusunan Dokumen SOP Deployment Aplikasi Laravel',
-            'description' => 'Menulis panduan step-by-step CI/CD pipeline, konfigurasi environment produksi, dan checklist rollback deployment.',
+            'title' => 'Evaluasi Feedback Pelatihan & Pengisian Kuesioner Inixindo',
+            'description' => 'Mengisi form evaluasi pengajar, materi training Laravel, dan fasilitas laboratorium pelatihan Inixindo.',
             'priority' => 'rendah',
             'status' => 'belum dimulai',
-            'due_date' => Carbon::today()->addDays(8),
+            'due_date' => Carbon::today()->addDays(7),
         ]);
 
-        // 4. Tugas untuk Siti Rahmawati (Product Designer & QA Engineer)
+        
         Task::create([
-            'user_id' => $siti->id,
-            'category_id' => $catDesign->id,
-            'title' => 'Desain Wireframe & User Flow Aplikasi Manajemen Tugas',
-            'description' => 'Menyusun wireframe resolusi tinggi untuk halaman login, ringkasan dashboard, tabel daftar tugas, dan form input.',
+            'user_id' => $radnet->id,
+            'category_id' => $catRadnet->id,
+            'title' => 'Monitoring Trafik Jaringan Fiber Optic & Bandwidth Gateway',
+            'description' => 'Memeriksa utilisasi link backbone utama Radnet, memantau grafik MRTG/Cacti, dan memastikan stabilitas latency di bawah 15ms.',
             'priority' => 'tinggi',
             'status' => 'selesai',
-            'due_date' => Carbon::today()->subDays(5),
+            'due_date' => Carbon::today()->subDays(4),
         ]);
 
         Task::create([
-            'user_id' => $siti->id,
-            'category_id' => $catDev->id,
-            'title' => 'Penulisan Unit & Feature Testing untuk Otentikasi & Policy',
-            'description' => 'Menulis 21 test case otomatis untuk memvalidasi alur auth, CRUD tugas, dan isolasi data antar pengguna (403 Forbidden).',
+            'user_id' => $radnet->id,
+            'category_id' => $catRadnet->id,
+            'title' => 'Audit Keamanan Firewall & Konfigurasi BGP Router Radnet',
+            'description' => 'Melakukan review access list firewall, filtering port berbahaya, dan pembaruan prefix list router border ISP Radnet.',
             'priority' => 'tinggi',
             'status' => 'selesai',
             'due_date' => Carbon::today()->subDays(2),
         ]);
 
         Task::create([
-            'user_id' => $siti->id,
-            'category_id' => $catDesign->id,
-            'title' => 'Audit Responsivitas Antarmuka pada Tampilan Mobile',
-            'description' => 'Memeriksa layout navigation sidebar, topbar menu, widget metrik, dan tabel tugas agar proporsional di layar smartphone.',
-            'priority' => 'sedang',
+            'user_id' => $radnet->id,
+            'category_id' => $catUrgent->id,
+            'title' => 'Penanganan Tiket Insiden Gangguan Koneksi Pelanggan Korporat',
+            'description' => 'Melakukan troubleshooting gangguan koneksi link FO pelanggan segmen korporasi dan melakukan koordinasi lapangan.',
+            'priority' => 'tinggi',
             'status' => 'dikerjakan',
             'due_date' => Carbon::today()->addDays(1),
         ]);
 
         Task::create([
-            'user_id' => $siti->id,
-            'category_id' => $catMarketing->id,
-            'title' => 'Pembuatan Video Screen Recording Demonstrasi Aplikasi',
-            'description' => 'Merekam video walkthrough berdurasi maksimal 5 menit memperlihatkan login 2 user, CRUD tugas, filter, dan uji proteksi akses.',
-            'priority' => 'tinggi',
+            'user_id' => $radnet->id,
+            'category_id' => $catRadnet->id,
+            'title' => 'Setup Backup Otomatis Database & File Storage ke Disaster Recovery Center',
+            'description' => 'Mengonfigurasi cron backup harian database MySQL dan sync file lampiran ke server backup off-site Radnet.',
+            'priority' => 'sedang',
             'status' => 'dikerjakan',
             'due_date' => Carbon::today()->addDays(3),
         ]);
 
         Task::create([
-            'user_id' => $siti->id,
+            'user_id' => $radnet->id,
             'category_id' => $catUrgent->id,
-            'title' => 'Investigasi & Pengujian Keamanan Akses Endpoint Privat',
-            'description' => 'Memastikan tidak ada celah Information Disclosure pada ID tugas pengguna lain ketika parameter URL dimanipulasi.',
+            'title' => 'Investigasi Lonjakan Latensi DNS Resolver Publik Radnet',
+            'description' => 'Menganalisis anomali query spike pada DNS recursive server dan menerapkan rate limiting mitigasi DNS flood.',
             'priority' => 'tinggi',
             'status' => 'belum dimulai',
-            'due_date' => Carbon::today()->subDays(1), // Overdue
+            'due_date' => Carbon::today()->subDays(1), 
         ]);
 
         Task::create([
-            'user_id' => $siti->id,
+            'user_id' => $radnet->id,
             'category_id' => $catOps->id,
-            'title' => 'Penyusunan Panduan Pengguna (User Guide) & FAQ',
-            'description' => 'Menulis artikel panduan cara membuat tugas, memfilter data, mengubah status cepat, dan mengelola kategori tugas.',
+            'title' => 'Penyusunan Rekapitulasi Laporan SLA & Ketersediaan Layanan Bulanan',
+            'description' => 'Menghitung persentase uptime jaringan seluruh pelanggan (target 99.8%) dan mendokumentasikan ringkasan insiden bulanan.',
             'priority' => 'rendah',
             'status' => 'belum dimulai',
-            'due_date' => Carbon::today()->addDays(7),
+            'due_date' => Carbon::today()->addDays(6),
         ]);
+
+        
+        $allTasks = Task::all();
+        foreach ($allTasks as $idx => $task) {
+            
+            $task->checklists()->createMany([
+                ['title' => 'Tinjau kebutuhan spesifikasi & dokumen teknis', 'is_completed' => true],
+                ['title' => 'Implementasi fitur dan eksekusi teknis tahap inti', 'is_completed' => ($task->status !== 'belum dimulai')],
+                ['title' => 'Pengujian fungsionalitas, verifikasi & review hasil', 'is_completed' => ($task->status === 'selesai')],
+            ]);
+
+            
+            $task->comments()->create([
+                'user_id' => $task->user_id,
+                'comment' => 'Memulai inisiasi pengerjaan tugas sesuai target rencana kerja.',
+                'created_at' => Carbon::now()->subDays(2),
+            ]);
+
+            if ($task->status === 'selesai') {
+                $task->comments()->create([
+                    'user_id' => $task->user_id,
+                    'comment' => 'Pekerjaan telah rampung dengan baik dan seluruh kriteria pengujian berhasil dilewati.',
+                    'created_at' => Carbon::now()->subHours(5),
+                ]);
+            } elseif ($task->status === 'dikerjakan') {
+                $task->comments()->create([
+                    'user_id' => $task->user_id,
+                    'comment' => 'Sedang dalam proses pengerjaan bagian inti. Estimasi selesai tepat waktu.',
+                    'created_at' => Carbon::now()->subHours(2),
+                ]);
+            }
+        }
     }
 }

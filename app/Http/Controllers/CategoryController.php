@@ -9,24 +9,20 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    /**
-     * Tampilkan daftar kategori dan jumlah tugas terkait.
-     */
+    
     public function index()
     {
         $categories = Category::withCount('tasks')->orderBy('name')->get();
         return view('categories.index', compact('categories'));
     }
 
-    /**
-     * Simpan kategori baru.
-     */
+    
     public function store(CategoryRequest $request)
     {
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
 
-        // Pastikan slug unik
+        
         $baseSlug = $validated['slug'];
         $count = 1;
         while (Category::where('slug', $validated['slug'])->exists()) {
@@ -39,9 +35,7 @@ class CategoryController extends Controller
             ->with('success', 'Kategori baru berhasil dibuat.');
     }
 
-    /**
-     * Perbarui data kategori.
-     */
+    
     public function update(CategoryRequest $request, Category $category)
     {
         $validated = $request->validated();
@@ -59,9 +53,7 @@ class CategoryController extends Controller
             ->with('success', 'Kategori berhasil diperbarui.');
     }
 
-    /**
-     * Hapus kategori.
-     */
+    
     public function destroy(Category $category)
     {
         $category->delete();
