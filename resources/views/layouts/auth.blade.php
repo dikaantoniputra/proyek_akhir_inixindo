@@ -9,16 +9,16 @@
     <meta content="TaskApp" name="author" />
 
     
-    <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
     
-    <script src="/admin/assets/js/config.js"></script>
+    <script src="/assets/js/config.js"></script>
 
     
-    <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     
-    <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     @stack('styles')
 </head>
@@ -43,10 +43,10 @@
                 
                 <div class="auth-brand text-center text-lg-start">
                     <a href="{{ url('/') }}" class="logo-dark">
-                        <span><img src="/admin/assets/images/logo-dark.png" alt="dark logo" height="26"></span>
+                        <span><img src="/assets/images/logo-dark.png" alt="dark logo" height="26"></span>
                     </a>
                     <a href="{{ url('/') }}" class="logo-light">
-                        <span><img src="/admin/assets/images/logo.png" alt="logo" height="26"></span>
+                        <span><img src="/assets/images/logo.png" alt="logo" height="26"></span>
                     </a>
                 </div>
 
@@ -85,9 +85,9 @@
                 </div>
 
                 
-                <footer class="footer footer-alt">
+                {{-- <footer class="footer footer-alt">
                     <p class="text-muted mb-0">{{ date('Y') }} &copy; TaskApp - Mini Project Laravel</p>
-                </footer>
+                </footer> --}}
 
             </div> 
         </div>
@@ -96,10 +96,28 @@
     
 
     
-    <script src="/admin/assets/js/vendor.min.js"></script>
+    <script src="/assets/js/vendor.min.js"></script>
 
     
-    <script src="/admin/assets/js/app.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.jQuery) {
+                $(document).on('click', '[data-password]', function() {
+                    var isShown = $(this).attr('data-password') === 'true';
+                    var icon = $(this).find('i');
+                    if (icon.length) {
+                        if (isShown) {
+                            icon.removeClass('ri-eye-line').addClass('ri-eye-off-line');
+                        } else {
+                            icon.removeClass('ri-eye-off-line').addClass('ri-eye-line');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 
     @stack('scripts')
 

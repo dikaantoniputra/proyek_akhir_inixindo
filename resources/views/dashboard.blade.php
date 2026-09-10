@@ -388,7 +388,7 @@
 @endsection
 
 @push('scripts')
-<script src="/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         @if($totalTasks > 0)

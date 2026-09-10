@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <title>403 Akses Ditolak | TaskApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
-    <script src="/admin/assets/js/config.js"></script>
-    <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
-    <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <script src="/assets/js/config.js"></script>
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="authentication-bg">
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
@@ -38,7 +38,7 @@
     <footer class="footer footer-alt fw-medium">
         <span class="text-dark-emphasis">&copy; {{ date('Y') }} TaskApp - Aplikasi Manajemen Tugas</span>
     </footer>
-    <script src="/admin/assets/js/vendor.min.js"></script>
-    <script src="/admin/assets/js/app.min.js"></script>
+    <script src="/assets/js/vendor.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
 </body>
 </html>

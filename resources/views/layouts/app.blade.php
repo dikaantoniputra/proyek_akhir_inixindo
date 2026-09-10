@@ -9,7 +9,7 @@
     <meta content="TaskApp" name="author" />
 
     
-    <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
     
     <script>
@@ -20,13 +20,13 @@
     </script>
 
     
-    <script src="/admin/assets/js/config.js"></script>
+    <script src="/assets/js/config.js"></script>
 
     
-    <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     
-    <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     <style>
         .page-title-box {
@@ -61,20 +61,20 @@
                         
                         <a href="{{ route('dashboard') }}" class="logo-light">
                             <span class="logo-lg">
-                                <img src="/admin/assets/images/logo.png" alt="logo">
+                                <img src="/assets/images/logo.png" alt="logo">
                             </span>
                             <span class="logo-sm">
-                                <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                                <img src="/assets/images/logo-sm.png" alt="small logo">
                             </span>
                         </a>
 
                         
                         <a href="{{ route('dashboard') }}" class="logo-dark">
                             <span class="logo-lg">
-                                <img src="/admin/assets/images/logo-dark.png" alt="dark logo">
+                                <img src="/assets/images/logo-dark.png" alt="dark logo">
                             </span>
                             <span class="logo-sm">
-                                <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                                <img src="/assets/images/logo-sm.png" alt="small logo">
                             </span>
                         </a>
                     </div>
@@ -234,20 +234,20 @@
             
             <a href="{{ route('dashboard') }}" class="logo logo-light">
                 <span class="logo-lg">
-                    <img src="/admin/assets/images/logo.png" alt="logo">
+                    <img src="/assets/images/logo.png" alt="logo">
                 </span>
                 <span class="logo-sm">
-                    <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                    <img src="/assets/images/logo-sm.png" alt="small logo">
                 </span>
             </a>
 
             
             <a href="{{ route('dashboard') }}" class="logo logo-dark">
                 <span class="logo-lg">
-                    <img src="/admin/assets/images/logo-dark.png" alt="dark logo">
+                    <img src="/assets/images/logo-dark.png" alt="dark logo">
                 </span>
                 <span class="logo-sm">
-                    <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                    <img src="/assets/images/logo-sm.png" alt="small logo">
                 </span>
             </a>
 
@@ -428,10 +428,10 @@
     
 
     
-    <script src="/admin/assets/js/vendor.min.js"></script>
+    <script src="/assets/js/vendor.min.js"></script>
 
     
-    <script src="/admin/assets/js/app.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
 
     <script>
         (function() {
@@ -454,6 +454,20 @@
                     
                     if (icon) {
                         icon.className = newTheme === 'dark' ? 'ri-sun-line fs-22' : 'ri-moon-line fs-22';
+                    }
+                });
+            }
+
+            if (window.jQuery) {
+                $(document).on('click', '[data-password]', function() {
+                    var isShown = $(this).attr('data-password') === 'true';
+                    var icon = $(this).find('i');
+                    if (icon.length) {
+                        if (isShown) {
+                            icon.removeClass('ri-eye-line').addClass('ri-eye-off-line');
+                        } else {
+                            icon.removeClass('ri-eye-off-line').addClass('ri-eye-line');
+                        }
                     }
                 });
             }

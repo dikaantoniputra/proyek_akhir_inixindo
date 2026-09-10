@@ -18,10 +18,15 @@
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Kata Sandi <span class="text-danger">*</span></label>
-            <input class="form-control @error('password') is-invalid @enderror" type="password" id="password" name="password" required placeholder="Masukkan kata sandi">
-            @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <div class="input-group input-group-merge">
+                <input class="form-control @error('password') is-invalid @enderror" type="password" id="password" name="password" required placeholder="Masukkan kata sandi">
+                <div class="input-group-text" data-password="false" style="cursor: pointer;" title="Tampilkan / Sembunyikan Kata Sandi">
+                    <i class="ri-eye-line password-eye-icon"></i>
+                </div>
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <div class="mb-3">
             <div class="form-check">

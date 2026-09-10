@@ -5,8 +5,8 @@
 
 @push('styles')
     
-    <link href="/admin/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-    <link href="/admin/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
 @endpush
 
 @section('breadcrumb')
@@ -190,10 +190,10 @@
 
 @push('scripts')
     
-    <script src="/admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/admin/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="/admin/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/admin/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 
     <script>
         $(document).ready(function() {

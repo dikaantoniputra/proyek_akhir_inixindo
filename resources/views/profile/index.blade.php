@@ -118,9 +118,12 @@
 
                     <div class="mb-3">
                         <label for="current_password" class="form-label fw-semibold">Kata Sandi Saat Ini <span class="text-danger">*</span></label>
-                        <div class="input-group">
+                        <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="ri-lock-unlock-line"></i></span>
                             <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" placeholder="Masukkan kata sandi lama" required>
+                            <div class="input-group-text" data-password="false" style="cursor: pointer;" title="Tampilkan / Sembunyikan Kata Sandi">
+                                <i class="ri-eye-line password-eye-icon"></i>
+                            </div>
                             @error('current_password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -130,9 +133,12 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="password" class="form-label fw-semibold">Kata Sandi Baru <span class="text-danger">*</span></label>
-                            <div class="input-group">
+                            <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="ri-key-line"></i></span>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Minimal 6 karakter" required>
+                                <div class="input-group-text" data-password="false" style="cursor: pointer;" title="Tampilkan / Sembunyikan Kata Sandi">
+                                    <i class="ri-eye-line password-eye-icon"></i>
+                                </div>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -141,9 +147,12 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="password_confirmation" class="form-label fw-semibold">Konfirmasi Kata Sandi Baru <span class="text-danger">*</span></label>
-                            <div class="input-group">
+                            <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="ri-check-double-line"></i></span>
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Ulangi kata sandi baru" required>
+                                <div class="input-group-text" data-password="false" style="cursor: pointer;" title="Tampilkan / Sembunyikan Kata Sandi">
+                                    <i class="ri-eye-line password-eye-icon"></i>
+                                </div>
                             </div>
                         </div>
                     </div>

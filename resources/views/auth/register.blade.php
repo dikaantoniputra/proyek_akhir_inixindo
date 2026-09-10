@@ -25,14 +25,24 @@
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Kata Sandi <span class="text-danger">*</span></label>
-            <input class="form-control @error('password') is-invalid @enderror" type="password" id="password" name="password" required placeholder="Minimal 6 karakter">
-            @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <div class="input-group input-group-merge">
+                <input class="form-control @error('password') is-invalid @enderror" type="password" id="password" name="password" required placeholder="Minimal 6 karakter">
+                <div class="input-group-text" data-password="false" style="cursor: pointer;" title="Tampilkan / Sembunyikan Kata Sandi">
+                    <i class="ri-eye-line password-eye-icon"></i>
+                </div>
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi <span class="text-danger">*</span></label>
-            <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required placeholder="Ketik ulang kata sandi">
+            <div class="input-group input-group-merge">
+                <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" required placeholder="Ketik ulang kata sandi">
+                <div class="input-group-text" data-password="false" style="cursor: pointer;" title="Tampilkan / Sembunyikan Kata Sandi">
+                    <i class="ri-eye-line password-eye-icon"></i>
+                </div>
+            </div>
         </div>
         <div class="d-grid mb-0 text-center">
             <button class="btn btn-primary" type="submit"><i class="ri-user-add-line me-1"></i> Daftar Sekarang</button>
